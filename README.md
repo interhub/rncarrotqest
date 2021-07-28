@@ -16,4 +16,4 @@ import Rncarrotquest from 'react-native-rncarrotquest';
 Rncarrotquest;
 ```
 
-> lib was created with https://github.com/brodybits/create-react-native-module 
+> lib was created with "https://github.com/brodybits/create-react-native-module"
