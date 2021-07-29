@@ -49,10 +49,20 @@ android {
         targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
     }
     lintOptions {
         abortOnError false
     }
+    packagingOptions {
+            exclude 'META-INF/*.kotlin_module'
+    }
+    compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+    }
+
 }
 
 repositories {
@@ -67,11 +77,15 @@ repositories {
         url "$rootDir/../node_modules/jsc-android/dist"
     }
     google()
+    maven { url "https://raw.github.com/carrotquest/android-sdk/beta" }
+            maven { url "https://jitpack.io" }
 }
 
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'io.carrotquest:android-sdk:1.0.28-commonRelease'
 }
 
 def configureReactNativePom(def pom) {
