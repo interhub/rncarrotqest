@@ -2,11 +2,15 @@
 
 package com.reactlibrary;
 
+import android.util.Log;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
-import com.
+
+import io.carrotquest_sdk.android.Carrot;
+import io.carrotquest_sdk.android.core.main.CarrotSDK;
 
 public class RncarrotquestModule extends ReactContextBaseJavaModule {
 
@@ -23,13 +27,21 @@ public class RncarrotquestModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
-        // TODO: Implement some actually useful functionality
-        callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
+    public void test(String stringArgument, Callback callback) {
+        callback.invoke("Received numberArgument: " + stringArgument);
     }
 
     @ReactMethod
-    public init(Callback callback){
-        Carrot.setup(this, apiKey, callback)
+    public void init(CarrotSDK.Callback<Boolean> callback) {
+        String apiKey = "41187-6baa7e0857a3f5fc899e2109d3";
+        String appId = "41187";
+        Carrot.setup(this.reactContext, apiKey, appId);
     }
+
+    @ReactMethod
+    public void openChat(){
+        Carrot.openChat(this.reactContext);
+        Log.d("RncarrotquestModule", "was call openChat");
+    }
+
 }
