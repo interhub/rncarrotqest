@@ -56,11 +56,11 @@ android {
         abortOnError false
     }
     packagingOptions {
-            exclude 'META-INF/*.kotlin_module'
+        exclude 'META-INF/*.kotlin_module'
     }
     compileOptions {
-            sourceCompatibility 1.8
-            targetCompatibility 1.8
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 
 }
@@ -78,14 +78,14 @@ repositories {
     }
     google()
     maven { url "https://raw.github.com/carrotquest/android-sdk/beta" }
-            maven { url "https://jitpack.io" }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'io.carrotquest:android-sdk:1.0.28-commonRelease'
+    implementation 'io.carrotquest:android-sdk:1.0.32-commonRelease'
 }
 
 def configureReactNativePom(def pom) {
