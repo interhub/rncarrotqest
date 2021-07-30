@@ -55,13 +55,13 @@ android {
     lintOptions {
         abortOnError false
     }
-    packagingOptions {
-        exclude 'META-INF/*.kotlin_module'
-    }
-    compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
-    }
+     packagingOptions {
+         exclude 'META-INF/*.kotlin_module'
+     }
+     compileOptions {
+         sourceCompatibility 1.8
+         targetCompatibility 1.8
+     }
 
 }
 
@@ -78,6 +78,11 @@ repositories {
     }
     google()
 
+    maven {
+        // local this package
+        url "$rootDir/../node_modules/react-native-carrotquest/android"
+    }
+
 }
 
 dependencies {
@@ -85,7 +90,8 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
 
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'io.carrotquest:android-sdk:1.0.32-commonRelease'
+    implementation files('./android-sdk:1.0.0')
+
 }
 
 def configureReactNativePom(def pom) {
@@ -95,7 +101,7 @@ def configureReactNativePom(def pom) {
         name packageJson.title
         artifactId packageJson.name
         version = packageJson.version
-        group = "com.reactlibrary"
+        group = "com.rncarrotquest"
         description packageJson.description
         url packageJson.repository.baseUrl
 

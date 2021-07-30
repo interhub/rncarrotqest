@@ -1,7 +1,9 @@
 // RncarrotquestModule.java
 
-package com.reactlibrary;
+package com.rncarrotquest;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -11,6 +13,7 @@ import com.facebook.react.bridge.Callback;
 
 import io.carrotquest_sdk.android.Carrot;
 import io.carrotquest_sdk.android.core.main.CarrotSDK;
+import io.carrotquest_sdk.android.presentation.mvp.dialog.view.DialogActivity;
 
 public class RncarrotquestModule extends ReactContextBaseJavaModule {
 
@@ -32,16 +35,24 @@ public class RncarrotquestModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void init(CarrotSDK.Callback<Boolean> callback) {
+    public void init() {
         String apiKey = "41187-6baa7e0857a3f5fc899e2109d3";
         String appId = "41187";
+        Carrot.setDebug(true);
         Carrot.setup(this.reactContext, apiKey, appId);
     }
 
     @ReactMethod
     public void openChat(){
-        Carrot.openChat(this.reactContext);
-        Log.d("RncarrotquestModule", "was call openChat");
+        try{
+            Context context = this.reactContext.getApplicationContext();
+            Intent intent = new Intent(context, DialogActivity.class);
+            intent.putExtra("CONVERSATION_ID_ARG", "last_conversation");
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }catch (Error e){
+            Log.d("openChat", e.toString());
+        }
     }
 
 }
