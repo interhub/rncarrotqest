@@ -45,10 +45,10 @@ public class RncarrotquestModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void openChat(){
         try{
-            Context context = this.reactContext.getApplicationContext();
+            Context context = this.getReactApplicationContext();
             Intent intent = new Intent(context, DialogActivity.class);
             intent.putExtra("CONVERSATION_ID_ARG", "last_conversation");
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }catch (Error e){
             Log.d("openChat", e.toString());
